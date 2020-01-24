@@ -92,13 +92,35 @@ class SortingRobot:
         """
         return self._light == "ON"
 
-    def sort(self):
-        """
-        Sort the robot's list.
-        """
-        # Fill this out
-        pass
+# Possibilities
+#   {move} [left] or [right]
+#   {swap} [item]
+#   {compare} [item] that holding with [item] on the ground
+#   can {switch} [light] ==> looks like it possible to use it like cache for cool sorting
+# Plan
+#   => Possible to use bubble sort or similar
+#   - should use given classes for build sorting
+#   - robot move right and comparing numbers
+#   - if that item less (compare_item => -1) then switch
+#   - possible to use light ON and light OFF for starting robot on begin of list and ending on the end of the list
 
+    def sort(self):
+        self.set_light_on()
+        self.move_right()
+        self.swap_item()
+        while self.light_is_on():
+            while self.can_move_left():
+                self.move_left()
+            while self.compare_item() is not None:
+                if self.compare_item() == -1:
+                    self.swap_item()
+                self.move_right()
+            self.swap_item()
+            if self.can_move_right():
+                self.move_right()
+                self.swap_item()
+            else:
+                self.set_light_off()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
