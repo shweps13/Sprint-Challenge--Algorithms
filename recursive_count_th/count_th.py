@@ -18,10 +18,19 @@ def count_th(word):
     
     count = 0
     th_search = word.find("th")
-    print("Search", th_search)
+    # print("Search", th_search)
+
+    if th_search == -1:
+        print("There is no 'th' element")
+        count += 0
+    else:
+        count += + 1
+        
+        count += count_th(word[int(th_search) + 2:])
+        print("recursion", count)
 
 
     return count
 
 
-count_th("ololotholol")
+print(count_th("othlolotholothl"))
